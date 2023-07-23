@@ -1,20 +1,16 @@
+const mongoose = require("mongoose");
 const app = require("./app");
-const {
-  listContacts,
-  getContactById,
-  addContact,
-  removeContact,
-  updateContact,
-  contactsPath,
-} = require("./models/contacts");
+const { DB_HOST } = process.env;
 
-app.listen(3000, async () => {
-  console.log("Server running. Use our API on port: 3000");
-
-  // console.log(contactsPath);
-  // console.log(await listContacts());
-  // console.log(await getContactById("C9sjBfCo4UJCWjzBnOtxl"));
-  // console.log(await removeContact("C9sjBfCo4UJCWjzBnOtxl"));
-  // console.log(await addContact("serg", "fsfsf@gag.com", "35545"));
-  // console.log(await updateContact('rsKkOQUi80UsgVPCcLZZW', {name: 'serg',email: 'fsfsafasf', phone: '(748) 206-2688' }));
-});
+mongoose
+  .connect(DB_HOST)
+  .then(() => console.log("Database connection successful"))
+  .then(() =>
+    app.listen(3000, async () => {
+      console.log("Server running. Use our API on port: 3000");
+    })
+  )
+  .catch((error) => {
+    console.log(error.message);
+    process.exit(1);
+  });
