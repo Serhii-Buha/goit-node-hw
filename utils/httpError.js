@@ -1,4 +1,16 @@
-const httpError = (status, message) => {
+const errorMessageList = {
+  400: "Bad Request",
+  401: "Unauthorized",
+  403: "Forbidden",
+  404: "Not Found",
+  409: "Conflict",
+  200: "OK",
+  201: "Created",
+  204: "No Content",
+};
+// errorMessageList[status] = object[key]
+
+const httpError = (status, message = errorMessageList[status]) => {
   const error = new Error(message);
   error.status = status;
   return error;
@@ -7,4 +19,3 @@ const httpError = (status, message) => {
 module.exports = {
   httpError,
 };
-    

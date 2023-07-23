@@ -1,6 +1,6 @@
 const joi = require("joi");
 const { Schema } = require("mongoose");
-const { mongooseError } = require("../utils/mongooseError");
+const { mongooseError } = require("../utils");
 
 const addShema = joi.object({
   name: joi.string().required(),
@@ -9,22 +9,31 @@ const addShema = joi.object({
   favorite: joi.boolean(),
 });
 
-const contactSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, "Set name for contact"],
+const contactSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Set name for contact"],
+    },
+    email: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    favorite: {
+      type: Boolean,
+      default: false,
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user", // 'user' - название коллекции (в единственном числе), с которой будет ObjectId user
+      required: true,
+    },
+    // в каждый контакт мы обязательно записываем owner т.е. владелец его user _id и по id owner т.е.  пользователя в каждом контакте мы понимаем что контакт принадлежит определенному user
   },
-  email: {
-    type: String,
-  },
-  phone: {
-    type: String,
-  },
-  favorite: {
-    type: Boolean,
-    default: false,
-  },
-});
+  { versionKey: false, timestamps: true }
+);
 
 contactSchema.post("save", mongooseError);
 
