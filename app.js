@@ -13,6 +13,7 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));  // http://localhost:3000/avatars/64c28928c601e11d2d79ef74_troll-8108315.png
 
 app.use("/api/auth", authRouter);
 app.use("/api/contacts", contactsRouter);

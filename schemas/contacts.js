@@ -2,7 +2,7 @@ const joi = require("joi");
 const { Schema } = require("mongoose");
 const { mongooseError } = require("../utils");
 
-const addShema = joi.object({
+const addSchema = joi.object({
   name: joi.string().required(),
   email: joi.string().required(),
   phone: joi.string().required(),
@@ -42,7 +42,7 @@ const updateFavoriteSchema = joi.object({
 });
 
 module.exports = {
-  addShema,
+  addSchema,
   contactSchema,
   updateFavoriteSchema,
 };

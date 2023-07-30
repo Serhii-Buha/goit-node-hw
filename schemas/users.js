@@ -25,6 +25,10 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
+    avatarURL: {
+      type: String,
+      required: [true, "AvatarURL is required"],
+    },
   },
   { versionKey: false, timestamps: true }
 );
@@ -32,13 +36,13 @@ const userSchema = new Schema(
 userSchema.post("save", mongooseError);
 // если валидация не пройдена middlwar ошибка
 
-const registerShema = joi.object({
+const registerSchema = joi.object({
   name: joi.string().min(3),
   email: joi.string().pattern(emailRegexp).required(),
   password: joi.string().min(6).required(),
 });
 
-const loginShema = joi.object({
+const loginSchema = joi.object({
   email: joi.string().pattern(emailRegexp).required(),
   password: joi.string().required(),
 });
@@ -49,7 +53,7 @@ const subscriptionSchema = joi.object({
 
 module.exports = {
   userSchema,
-  registerShema,
-  loginShema,
+  registerSchema,
+  loginSchema,
   subscriptionSchema,
 };

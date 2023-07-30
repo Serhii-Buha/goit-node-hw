@@ -1,10 +1,10 @@
 const { Contact } = require("../../models");
-const { addShema } = require("../../schemas");
+const { addSchema } = require("../../schemas");
 const { httpError } = require("../../utils");
 
 exports.add = async (req, res, next) => {
   try {
-    const { error } = addShema.validate(req.body);
+    const { error } = addSchema.validate(req.body);
     if (error) throw httpError(400, "missing required name field");
 
     const { _id: owner } = req.user;

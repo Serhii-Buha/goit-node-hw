@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { loginShema } = require("../../schemas");
+const { loginSchema } = require("../../schemas");
 const { httpError } = require("../../utils");
 const { User } = require("../../models");
 
@@ -8,7 +8,7 @@ const { SECRET_KEY } = process.env;
 
 exports.login = async (req, res, next) => {
   try {
-    const { error } = loginShema.validate(req.body);
+    const { error } = loginSchema.validate(req.body);
     if (error) throw httpError(400, error);
 
     const { email, password } = req.body; // 123456
