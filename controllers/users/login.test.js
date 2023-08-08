@@ -20,11 +20,10 @@ This suite of unit tests validates the behavior of the login functionality of th
  */
 
 const request = require("supertest");
+const app = require("../../app");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const app = require("../../app");
 const { User } = require("../../models");
-const { login } = require("../users");
 
 jest.mock("jsonwebtoken");
 jest.mock("bcrypt");

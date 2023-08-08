@@ -1,8 +1,11 @@
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 const { registerSchema } = require("../../schemas");
-const { httpError } = require("../../utils");
+const { httpError, sendGridEmail } = require("../../utils");
 const { User } = require("../../models");
+const { nanoid } = require("nanoid");
+
+const { BASE_URL } = process.env;
 
 exports.register = async (req, res, next) => {
   try {
